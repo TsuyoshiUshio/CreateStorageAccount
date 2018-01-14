@@ -65,6 +65,7 @@ namespace CreateStorageAccount
                 // Also I've got Cloud Exception: The request is being throttled. 
                 // https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-request-limits
                 // https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits
+                // https://docs.microsoft.com/ja-jp/azure/storage/common/storage-scalability-targets manage write limit 200/hour 
                 ConcurrentBag<Task> taskList = new ConcurrentBag<Task>();
                 Parallel.For(0, 20, i =>
                 {
