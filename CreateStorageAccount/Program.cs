@@ -10,6 +10,7 @@ using Microsoft.Azure.Management.ResourceManager.Models;
 
 using System.Linq;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
+using System.Collections.Concurrent;
 
 namespace CreateStorageAccount
 {
@@ -58,20 +59,32 @@ namespace CreateStorageAccount
             using (var client = new StorageManagementClient(credentials))
             {
 
-                var accountName = "someaacountabc2";
-                
-                var storageAccount = await CreateStorageAccountAsync(client, accountName, location);
+                var accountNameHeader = "efitabdesae";
 
-                var key = await GetAccountKeyAsync(client, accountName);
-                printStorageAccountInfo(accountName, key);
+                // First, I try to create 100 storage account, however, the limit of storage account is 200 per subscription. 
+                // Also I've got Cloud Exception: The request is being throttled. 
+                // https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-request-limits
+                // https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits
+                ConcurrentBag<Task> taskList = new ConcurrentBag<Task>();
+                Parallel.For(0, 20, i =>
+                {
+                    taskList.Add(Task.Run(async () =>
+                    {
+                        var accountName = $"{accountNameHeader}{i}";
+                        var storageAccount = await CreateStorageAccountAsync(client, accountName, location);
+                        var key = await GetAccountKeyAsync(client, accountName);
+                        printStorageAccountInfo(accountName, key);
+                    }));
+                });
+                await Task.WhenAll(taskList.ToArray());
+                Console.WriteLine("All Storage Accounts created. Press Any Key");
+                Console.ReadLine();
             }
             
         }
         private void printStorageAccountInfo(string accountName, StorageAccountKey key)
         {
             Console.WriteLine($"Storage Account was created. Name: {accountName} ConnectionString: {key.Value}");
-            Console.WriteLine("Press Any Key");
-            Console.ReadLine();
         }
         private async Task<StorageAccount> CreateStorageAccountAsync(StorageManagementClient client, string accountName, string location)
         {
