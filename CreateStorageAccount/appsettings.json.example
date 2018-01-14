@@ -1,0 +1,7 @@
+{
+  "resourceGroup": "YOUR_RESOURCE_GROUP",
+  "clientId": "YOUR_SERVICE_PRINCIPAL_APP_ID",
+  "clientSecret": "YOUR_SERVCIE_PRINCIPAL_SECRET",
+  "tenantId": "YOUR_TENANT_ID",
+  "subscriptionId": "YOUR_SUBSCRIPTION_ID"
+}
