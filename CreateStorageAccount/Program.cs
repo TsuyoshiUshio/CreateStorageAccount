@@ -59,7 +59,7 @@ namespace CreateStorageAccount
             using (var client = new StorageManagementClient(credentials))
             {
 
-                var accountNameHeader = "efitabdesae";
+                var accountNameHeader = "efitabdesa";
 
                 // First, I try to create 100 storage account, however, the limit of storage account is 200 per subscription. 
                 // Also I've got Cloud Exception: The request is being throttled. 
@@ -67,22 +67,53 @@ namespace CreateStorageAccount
                 // https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits
                 // https://docs.microsoft.com/ja-jp/azure/storage/common/storage-scalability-targets manage write limit 200/hour 
                 ConcurrentBag<Task> taskList = new ConcurrentBag<Task>();
-                Parallel.For(0, 20, i =>
+                var dictionary = new ConcurrentDictionary<string, string>();
+                Parallel.For(0, 10, i =>
                 {
                     taskList.Add(Task.Run(async () =>
                     {
-                        var accountName = $"{accountNameHeader}{i}";
+                        var accountName = $"{accountNameHeader}{i.ToString("00")}";
                         var storageAccount = await CreateStorageAccountAsync(client, accountName, location);
                         var key = await GetAccountKeyAsync(client, accountName);
                         printStorageAccountInfo(accountName, key);
+                        dictionary.TryAdd($"ConnectionString{i.ToString("00")}", getConnectionString(accountName, key.Value));
                     }));
                 });
                 await Task.WhenAll(taskList.ToArray());
                 Console.WriteLine("All Storage Accounts created. Press Any Key");
                 Console.ReadLine();
+                Console.WriteLine("Creating sample.config.json ...");
+                generateJsonfile(dictionary, "sample.config.json");
             }
             
         }
+
+        private void generateJsonfile(ConcurrentDictionary<string, string> dictionary, string filename)
+        {
+            var sortedDictionary = dictionary.OrderBy((x) => x.Key);
+            using(System.IO.StreamWriter file = new System.IO.StreamWriter(filename))
+            {
+                file.WriteLine("{");
+                var last = sortedDictionary.Last();
+                foreach (var line in sortedDictionary)
+                {
+                    var delimiter = ",";
+                    if (line.Key == last.Key)
+                    {
+                        delimiter = "";
+                    }
+
+                    file.WriteLine($"\"{line.Key}\":\"{line.Value}\"{delimiter}");
+                }
+                file.WriteLine("}");
+            }
+        }
+
+        private string getConnectionString(string storageAccountName, string accountKey)
+        {
+            return $"DefaultEndpointsProtocol=https;AccountName={storageAccountName};AccountKey={accountKey};EndpointSuffix=core.windows.net";
+        }
+
         private void printStorageAccountInfo(string accountName, StorageAccountKey key)
         {
             Console.WriteLine($"Storage Account was created. Name: {accountName} ConnectionString: {key.Value}");

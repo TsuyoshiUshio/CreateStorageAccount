@@ -1,0 +1,12 @@
+{
+"ConnectionString00":"DefaultEndpointsProtocol=https;AccountName=efitabdesa00;AccountKey=uIMhwiyJj4L+3khnRWMTtyQNzFSbxKcrAbJMOxNN+4glvxLt4xocN9abvwmynGNrQh5hedoncfXuHbhtEFSgzw==;EndpointSuffix=core.windows.net",
+"ConnectionString01":"DefaultEndpointsProtocol=https;AccountName=efitabdesa01;AccountKey=k9ripdvo5sFQ3Ls7UKyhjJar+GMscEWcJ4BeorYLV8FfsCmLGgH9Fu/VlpbBr9LIcpavSJd/mKc4nP2Mqo2x0g==;EndpointSuffix=core.windows.net",
+"ConnectionString02":"DefaultEndpointsProtocol=https;AccountName=efitabdesa02;AccountKey=Q4+PsTuIN9jg/8elyUHEs+D5omxz+zaP5MFXQQJLXfWBbmEfo+D6BnDbCB4NfNISaboVFjUsUX0rULbPIHH5UQ==;EndpointSuffix=core.windows.net",
+"ConnectionString03":"DefaultEndpointsProtocol=https;AccountName=efitabdesa03;AccountKey=43GGZYyzyZ8yJE4GghmvKxESOymy9c4WBZwYlZAU4/gAop2+9Re+kquUVZ0vVBVgAUPxZI/LS09xdZ+lQrL9SQ==;EndpointSuffix=core.windows.net",
+"ConnectionString04":"DefaultEndpointsProtocol=https;AccountName=efitabdesa04;AccountKey=U0DyKMTYj5bGr4lCGNfocSzaArGA9oD3CdXJhhJT/CHWaxV4/6d3D63x+sIXThDiG/3Ay6T5u/lDYv0j/qwp9g==;EndpointSuffix=core.windows.net",
+"ConnectionString05":"DefaultEndpointsProtocol=https;AccountName=efitabdesa05;AccountKey=n7MXiN6h+SSB77d7okR/9U+DiIBOQ95dE4vPrDLH/KbjYj290ofs7GxteBB7S/bafb6G1rMy5SAHMPwN1NUj9w==;EndpointSuffix=core.windows.net",
+"ConnectionString06":"DefaultEndpointsProtocol=https;AccountName=efitabdesa06;AccountKey=QimLQnoq8qFFyH3akOXijhO760icEPm6CeGkZ878asx6ZTrLAsUUd2M0sPuacyTdNWYWIJPS7b9dg1qWISZdDQ==;EndpointSuffix=core.windows.net",
+"ConnectionString07":"DefaultEndpointsProtocol=https;AccountName=efitabdesa07;AccountKey=Lm1grkSEb2cpvYKpipOH3A+45Nu4TlZ4oPwS66i8xZJlRFk5qQZyairnKR+y0GVDt9a9MuDuJkiB2lsbGyvlOg==;EndpointSuffix=core.windows.net",
+"ConnectionString08":"DefaultEndpointsProtocol=https;AccountName=efitabdesa08;AccountKey=7c0ubh0OWarVaviLSRHE7bJv90Y4z3vCSWDbHNLY0hsjJ0nwWy63/bXCk1EdJx7zv8hiKzMTu38f53qRcd0KWg==;EndpointSuffix=core.windows.net",
+"ConnectionString09":"DefaultEndpointsProtocol=https;AccountName=efitabdesa09;AccountKey=WUPLCftGLx0DU1k/X8dcJW+fOg60zsPgROK7yscg4xnkB7H28+UqyQm6dDyVM9mY8Kt3ptE+5ALq/tx50L/nYA==;EndpointSuffix=core.windows.net"
+}
